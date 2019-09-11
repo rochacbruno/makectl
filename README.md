@@ -33,7 +33,7 @@ $ makectl add --template=python-clean
 
 The end result will be
 
-```
+```make
 .PHONY run clean-pyc
 
 run:
