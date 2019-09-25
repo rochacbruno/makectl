@@ -56,4 +56,4 @@ clean-pyc:
 # MAKECTL MANAGED BLOCK END
 ```
 
-The template's database is a folder under this repo with `.template` files in it.
+The templates database is a folder under this repo with `.template` files in it.
