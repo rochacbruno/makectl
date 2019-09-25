@@ -1,4 +1,5 @@
-# makectl
+# makectl 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)] 
 Generate and Manage targets in your makefiles.
 
 Makectl is a command line tool to generate and manage general use targets in your makefiles.
