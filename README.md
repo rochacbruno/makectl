@@ -5,9 +5,9 @@ Makectl is a command line tool to generate and manage general use targets in you
 
 ## Features
 
-- Generates a Makefile and manage existing Makefiles
+- Generates Makefiles and manages existing Makefiles
 - Provides a repository with templates for general use targets
-- Do not breaks your custom targets
+- Does not break your custom targets
 
 ## Example
 
@@ -56,4 +56,4 @@ clean-pyc:
 # MAKECTL MANAGED BLOCK END
 ```
 
-The templates database is a folder under this repo with `.template` files in it.
+The template's database is a folder under this repo with `.template` files in it.
