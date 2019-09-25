@@ -1,5 +1,5 @@
 # makectl
-Generates and Manages targets in your makefiles.
+Generate and Manage targets in your makefiles.
 
 Makectl is a command line tool to generate and manage general use targets in your makefiles.
 
