@@ -3,6 +3,15 @@ name = "makectl"
 version = "0.1.0"
 authors = ["Bruno Rocha <rochacbruno@gmail.com>"]
 edition = "2018"
+description = "Manage and generate yout makefile targets"
+documentation = "https://docs.rs/makectl"
+homepage = "https://github.com/rochacbruno/makectl"
+repository = "https://github.com/rochacbruno/makectl"
+readme = "README.md"
+keywords = ['make', 'gnu-make', 'generators', 'templates']
+categories = ['filesystem', 'development-tools']
+license = "MIT"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
