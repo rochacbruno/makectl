@@ -1,4 +1,4 @@
-# makectl    ![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)]    ![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)]    ![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)] 
+# makectl    ![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)     ![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)    ![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)    ![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg) 
 
 Generate and Manage targets in your makefiles.
 
