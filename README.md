@@ -1,4 +1,4 @@
-# makectl    [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Frochacbruno%2Fmakectl%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/rochacbruno/makectl/goto?ref=master)   ![Crate version](https://img.shields.io/crates/v/makectl)  
+# makectl    [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Frochacbruno%2Fmakectl%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/rochacbruno/makectl/goto?ref=master)    ![Docs badge](https://docs.rs/makectl/badge.svg)   ![Crate version](https://img.shields.io/crates/v/makectl) 
 Generate and Manage targets in your makefiles.
 
 Makectl is a command line tool to generate and manage general use targets in your makefiles.
