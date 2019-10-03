@@ -13,3 +13,11 @@ jobs:
       run: cargo build --verbose
     - name: Run tests
       run: cargo test --verbose
+    - name: Check formating
+      run: |
+        rustup component add rustfmt
+        cargo fmt --all -- --check
+    - name: Check code issues
+      run: |
+        rustup component add clippy
+        cargo clippy --all -- -D warnings
