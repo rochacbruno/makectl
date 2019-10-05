@@ -14,7 +14,7 @@ pub struct Config {
 #[structopt()]
 pub enum Command {
     /// Add the provided templates into the Makefile.
-    Add(AddParams)
+    Add(AddParams),
 }
 
 #[derive(StructOpt)]
