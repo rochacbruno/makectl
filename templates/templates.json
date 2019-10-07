@@ -1,0 +1,12 @@
+{
+    "python-clean": {
+       "target": "clean-pyc",
+       "help": "Cleans Python cache and compiled meta files.",
+       "template-file": "clean-pyc.template"
+    },
+    "python-publish": {
+        "target": "publish",
+        "help": "Publishes a Python package to PyPI",
+        "template-lines": ["@python setup.py sdist", "@twine upload build/*"]
+    }
+ }
