@@ -1,8 +1,8 @@
 mod config;
 
-extern crate serde;
-extern crate serde_json;
-extern crate serde_derive;
+// use serde;
+use serde_json;
+// use serde_derive;
 
 use structopt::StructOpt;
 use std::process::Command;
@@ -12,23 +12,50 @@ use crate::config::Command as CmdArgs;
 use crate::config::Config;
 use std::fs;
 use std::fs::OpenOptions;
+use std::path::{Path, PathBuf};
+
+use directories::ProjectDirs;
 
 fn main() {
     let conf = Config::from_args();
-
+    let project_dir = ProjectDirs::from("com", "rochacbruno", "makectl").unwrap();
+    let project_dir = project_dir.config_dir();
     match conf.command {
         CmdArgs::Add(ref add_params) => {
-            add_template_to_makefile(&add_params.templates);
+            add_template_to_makefile(&add_params.templates, project_dir.join("makectl"));
             println!("Added templates {:?} to Makefile", add_params.templates);
         }
         CmdArgs::Update => {
-            let output = Command::new("git")
-                .arg("pull")
-                .output()
-                .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
-            io::stdout().write_all(&output.stdout).unwrap();
+            let makectl_dir = update_templates_from_github(project_dir)
+                .map_err(|e| eprintln!("unable to update templates from github: {:?}", e))
+                .unwrap();
+            println!("updated templates at {:?}", makectl_dir);
         }
     }
+}
+
+const GITHUB_REPO_URL: &str = "https://github.com/rochacbruno/makectl";
+
+fn update_templates_from_github(project_dir: &Path) -> std::io::Result<PathBuf> {
+    if project_dir.join("makectl").metadata().is_ok() {
+        let output = Command::new("git")
+            .arg("pull")
+            .current_dir(project_dir.join("makectl"))
+            .output()
+            .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
+        io::stdout().write_all(&output.stdout)?;
+    } else {
+        std::fs::create_dir_all(project_dir)?;
+
+        let output = Command::new("git")
+            .arg("clone")
+            .arg(GITHUB_REPO_URL)
+            .current_dir(project_dir)
+            .output()?;
+        io::stdout().write_all(&output.stdout)?;
+    }
+
+    return Ok(project_dir.join("makectl"));
 }
 
 fn get_json_from_templates_file(templates_path: &str) -> serde_json::Value {
@@ -38,9 +65,9 @@ fn get_json_from_templates_file(templates_path: &str) -> serde_json::Value {
         .expect(format!("File {} is not proper JSON format", templates_path).as_ref());
 }
 
-fn add_template_to_makefile(templates: &Vec<String>) {
-    let templates_path = "src/templates/templates.json";
-    let json = get_json_from_templates_file(&templates_path);
+fn add_template_to_makefile(templates: &Vec<String>, project_dir: PathBuf) {
+    let templates_path = project_dir.join("templates/templates.json");
+    let json = get_json_from_templates_file(templates_path.to_str().unwrap());
     let mut file_handler = OpenOptions::new()
         .write(true)
         .append(true)
@@ -52,9 +79,9 @@ fn add_template_to_makefile(templates: &Vec<String>) {
             .expect(format!("Templates file does not have key {}", template_key).as_ref());
         if template["template-file"].is_string() {
             let template_file_name = template["template-file"].as_str().unwrap();
-            let template_file_path = ["src/templates/", template_file_name].concat();
+            let template_file_path = project_dir.join("templates/").join(template_file_name);
             data_to_write_to_file = fs::read_to_string(&template_file_path)
-                .expect(format!("The file {} could not be read", &template_file_path).as_ref());
+                .expect(format!("The file {:?} could not be read", &template_file_path).as_ref());
         }
         else if template["template-lines"].is_array() {
             let template_lines_array = template["template-lines"].as_array().unwrap();
