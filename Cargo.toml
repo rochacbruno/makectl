@@ -1,24 +1,26 @@
 [package]
 name = "makectl"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Bruno Rocha <rochacbruno@gmail.com>"]
-edition = "2018"
-description = "Manage and generate yout makefile targets"
+edition = "2021"
+description = "Generate and manage targets in your Makefiles"
 documentation = "https://docs.rs/makectl"
 homepage = "https://github.com/rochacbruno/makectl"
 repository = "https://github.com/rochacbruno/makectl"
 readme = "README.md"
-keywords = ['make', 'gnu-make', 'generators', 'templates']
-categories = ['filesystem', 'development-tools']
+keywords = ["make", "gnu-make", "generators", "templates", "linter"]
+categories = ["filesystem", "development-tools"]
 license = "MIT"
 
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-structopt = "0.3.2"
-log = "0.4"
-serde = "1.0"
-serde_derive = "1.0"
-serde_json = "1.0"
-directories = "2.0"
+clap = { version = "4", features = ["derive"] }
+clap_complete = "4"
+anyhow = "1"
+thiserror = "2"
+colored = "3"
+inquire = "0.7"
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"
